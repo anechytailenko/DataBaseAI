@@ -1,0 +1,321 @@
+Create database hotelhomework;
+
+Use hotelhomework;
+
+
+
+Create table guests(
+ID bigint NOT NULL auto_increment,
+FirstName varchar(50),
+LastName varchar(50),
+Primary key(ID)
+);
+
+Create table booking(
+ID bigint NOT NULL auto_increment,
+guest_id bigint,
+check_in datetime,
+check_out datetime,
+Foreign key (guest_id) references guests(ID),
+Primary key(ID)
+);
+
+Create table rooms(
+ID bigint NOT NULL auto_increment,
+booking_id bigint,
+number_of_room int,
+class enum('double','single','family'),
+price double(50,2),
+Foreign key (booking_id) references booking(ID),
+Primary key(ID)
+);
+
+Create table payments(
+ID bigint NOT NULL auto_increment,
+guest_id bigint,
+payment double(50,2),
+Foreign key(guest_id) references guests(ID),
+Primary key(ID)
+);
+
+
+Create table additional_services(
+ID bigint  NOT NULL auto_increment,
+room_id bigint,
+area enum('bar','restaurant','taxi'),
+price double(50,2),
+Foreign key (room_id) references rooms(ID),
+Primary key(ID)
+);
+
+
+-- 1. Insert data into guests table (50 rows)
+-- Insert data into guests table
+INSERT INTO guests (FirstName, LastName) VALUES
+('Anna', 'Smith'),
+('John', 'Doe'),
+('Emily', 'Johnson'),
+('Michael', 'Brown'),
+('Jessica', 'Davis'),
+('Chris', 'Evans'),
+('Sophia', 'Williams'),
+('James', 'Jones'),
+('David', 'Martinez'),
+('Olivia', 'Garcia'),
+('Liam', 'Rodriguez'),
+('Ava', 'Hernandez'),
+('Noah', 'Lopez'),
+('Isabella', 'Gonzalez'),
+('Mason', 'Wilson'),
+('Mia', 'Anderson'),
+('Ethan', 'Thomas'),
+('Charlotte', 'Taylor'),
+('Alexander', 'Moore'),
+('Amelia', 'Jackson'),
+('Logan', 'Martin'),
+('Harper', 'Lee'),
+('Lucas', 'Perez'),
+('Ella', 'Thompson'),
+('Jackson', 'White'),
+('Avery', 'Harris'),
+('Sebastian', 'Sanchez'),
+('Sofia', 'Clark'),
+('Gabriel', 'Ramirez'),
+('Scarlett', 'Lewis'),
+('Carter', 'Robinson'),
+('Victoria', 'Walker'),
+('Henry', 'Hall'),
+('Grace', 'Allen'),
+('Wyatt', 'Young'),
+('Chloe', 'King'),
+('Owen', 'Wright'),
+('Zoe', 'Scott'),
+('Aiden', 'Green'),
+('Riley', 'Adams'),
+('Daniel', 'Baker'),
+('Nora', 'Nelson'),
+('Matthew', 'Carter'),
+('Lily', 'Mitchell'),
+('Samuel', 'Perez'),
+('Ella', 'Roberts'),
+('Leo', 'Turner'),
+('Penelope', 'Phillips');
+
+-- Insert data into booking table
+INSERT INTO booking (guest_id, check_in, check_out) VALUES -- Anna
+(1, '2024-09-01 14:00:00', '2024-09-05 12:00:00'),  -- Another booking for Anna
+(2, '2024-09-01 14:00:00', '2024-09-05 12:00:00'),  -- John
+(3, '2024-09-02 14:00:00', '2024-09-06 12:00:00'),  -- Emily
+(4, '2024-09-03 14:00:00', '2024-09-07 12:00:00'),  -- Michael
+(5, '2024-09-04 14:00:00', '2024-09-08 12:00:00'),  -- Jessica
+(6, '2024-09-05 14:00:00', '2024-09-09 12:00:00'),  -- Chris
+(7, '2024-09-06 14:00:00', '2024-09-10 12:00:00'),  -- Sophia
+(8, '2024-09-07 14:00:00', '2024-09-11 12:00:00'),  -- James
+(9, '2024-09-08 14:00:00', '2024-09-12 12:00:00'),  -- David
+(10, '2024-09-09 14:00:00', '2024-09-13 12:00:00'), -- Olivia
+(11, '2024-09-10 14:00:00', '2024-09-14 12:00:00'), -- Liam
+(12, '2024-09-11 14:00:00', '2024-09-15 12:00:00'), -- Ava
+(13, '2024-09-12 14:00:00', '2024-09-16 12:00:00'), -- Noah
+(14, '2024-09-13 14:00:00', '2024-09-17 12:00:00'), -- Isabella
+(15, '2024-09-14 14:00:00', '2024-09-18 12:00:00'), -- Mason
+(16, '2024-09-15 14:00:00', '2024-09-19 12:00:00'), -- Mia
+(17, '2024-09-16 14:00:00', '2024-09-20 12:00:00'), -- Ethan
+(18, '2024-09-17 14:00:00', '2024-09-21 12:00:00'), -- Charlotte
+(19, '2024-09-18 14:00:00', '2024-09-22 12:00:00'), -- Alexander
+(20, '2024-09-19 14:00:00', '2024-09-23 12:00:00'), -- Amelia
+(21, '2024-09-20 14:00:00', '2024-09-24 12:00:00'), -- Logan
+(22, '2024-09-21 14:00:00', '2024-09-25 12:00:00'), -- Harper
+(23, '2024-09-22 14:00:00', '2024-09-26 12:00:00'), -- Lucas
+(24, '2024-09-23 14:00:00', '2024-09-27 12:00:00'), -- Ella
+(25, '2024-09-24 14:00:00', '2024-09-28 12:00:00'), -- Jackson
+(26, '2024-09-25 14:00:00', '2024-09-29 12:00:00'), -- Avery
+(26, '2024-09-26 14:00:00', '2024-09-30 12:00:00'), -- Sebastian
+(28, '2024-09-27 14:00:00', '2024-10-01 12:00:00'), -- Sofia
+(28, '2024-09-28 14:00:00', '2024-10-02 12:00:00'), -- Gabriel
+(30, '2024-09-29 14:00:00', '2024-10-03 12:00:00'), -- Scarlett
+(31, '2024-09-30 14:00:00', '2024-10-04 12:00:00'), -- Carter
+(32, '2024-10-01 14:00:00', '2024-10-05 12:00:00'), -- Victoria
+(32, '2024-10-02 14:00:00', '2024-10-06 12:00:00'), -- Henry
+(34, '2024-10-03 14:00:00', '2024-10-07 12:00:00'), -- Grace
+(35, '2024-10-04 14:00:00', '2024-10-08 12:00:00'), -- Wyatt
+(36, '2024-10-05 14:00:00', '2024-10-09 12:00:00'), -- Chloe
+(37, '2024-10-06 14:00:00', '2024-10-10 12:00:00'), -- Owen
+(38, '2024-10-07 14:00:00', '2024-10-11 12:00:00'), -- Zoe
+(39, '2024-10-08 14:00:00', '2024-10-12 12:00:00'), -- Aiden
+(40, '2024-10-09 14:00:00', '2024-10-13 12:00:00'), -- Riley
+(41, '2024-10-10 14:00:00', '2024-10-14 12:00:00'), -- Daniel
+(42, '2024-10-11 14:00:00', '2024-10-15 12:00:00'), -- Nora
+(43, '2024-10-12 14:00:00', '2024-10-16 12:00:00'), -- Matthew
+(44, '2024-10-13 14:00:00', '2024-10-17 12:00:00'), -- Lily
+(46, '2024-10-14 14:00:00', '2024-10-18 12:00:00'), -- Samuel
+(46, '2024-10-15 14:00:00', '2024-10-19 12:00:00'), -- Ella
+(48, '2024-10-16 14:00:00', '2024-10-20 12:00:00'); -- Scarlett
+
+-- Insert data into rooms table
+INSERT INTO rooms (booking_id, number_of_room, class, price) VALUES
+(5, 101, 'double', 100.00),  -- Room for Anna
+(1, 102, 'single', 75.00),   -- Another room for Anna
+(2, 103, 'family', 150.00),  -- Room for John
+(3, 104, 'double', 100.00),  -- Room for Emily
+(4, 105, 'single', 75.00),   -- Room for Michael
+(5, 106, 'family', 150.00),  -- Room for Jessica
+(6, 107, 'double', 100.00),  -- Room for Chris
+(7, 108, 'single', 75.00),   -- Room for Sophia
+(8, 109, 'double', 100.00),  -- Room for James
+(9, 110, 'family', 150.00),  -- Room for David
+(10, 111, 'single', 75.00),  -- Room for Olivia
+(11, 112, 'double', 100.00),  -- Room for Liam
+(12, 113, 'family', 150.00),  -- Room for Ava
+(13, 114, 'single', 75.00),  -- Room for Noah
+(14, 115, 'double', 100.00),  -- Room for Isabella
+(15, 116, 'family', 150.00),  -- Room for Mason
+(16, 117, 'single', 75.00),   -- Room for Mia
+(17, 118, 'double', 100.00),  -- Room for Ethan
+(18, 119, 'family', 150.00),  -- Room for Charlotte
+(19, 120, 'single', 75.00),   -- Room for Alexander
+(20, 121, 'double', 100.00),  -- Room for Amelia
+(21, 122, 'single', 75.00),   -- Room for Logan
+(22, 123, 'family', 150.00),  -- Room for Harper
+(23, 124, 'double', 100.00),  -- Room for Lucas
+(24, 125, 'single', 75.00),   -- Room for Ella
+(25, 126, 'family', 150.00),  -- Room for Jackson
+(26, 127, 'double', 100.00),  -- Room for Avery
+(27, 128, 'single', 75.00),   -- Room for Sebastian
+(28, 129, 'family', 150.00),  -- Room for Sofia
+(29, 130, 'double', 100.00),  -- Room for Gabriel
+(30, 131, 'single', 75.00),   -- Room for Scarlett
+(31, 132, 'double', 100.00),  -- Room for Carter
+(32, 133, 'family', 150.00),  -- Room for Victoria
+(33, 134, 'single', 75.00),   -- Room for Henry
+(34, 135, 'double', 100.00),  -- Room for Grace
+(35, 136, 'family', 150.00),  -- Room for Wyatt
+(36, 137, 'single', 75.00),   -- Room for Chloe
+(37, 138, 'double', 100.00),  -- Room for Owen
+(38, 139, 'family', 150.00),  -- Room for Zoe
+(39, 140, 'single', 75.00),   -- Room for Aiden
+(40, 141, 'double', 100.00),  -- Room for Riley
+(41, 142, 'family', 150.00),  -- Room for Daniel
+(42, 143, 'single', 75.00),   -- Room for Nora
+(43, 144, 'double', 100.00),  -- Room for Matthew
+(44, 145, 'family', 150.00),  -- Room for Lily
+(45, 146, 'single', 75.00);  -- Room for Scarlett
+
+-- Insert data into payments table
+INSERT INTO payments (guest_id, payment) VALUES
+(1, 400.00),  -- Payment for Anna
+(2, 300.00),  -- Payment for John
+(3, 400.00),  -- Payment for Emily
+(4, 300.00),  -- Payment for Michael
+(5, 400.00),  -- Payment for Jessica
+(6, 300.00),  -- Payment for Chris
+(7, 400.00),  -- Payment for Sophia
+(8, 300.00),  -- Payment for James
+(9, 400.00),  -- Payment for David
+(10, 300.00), -- Payment for Olivia
+(11, 400.00), -- Payment for Liam
+(12, 300.00), -- Payment for Ava
+(13, 400.00), -- Payment for Noah
+(14, 300.00), -- Payment for Isabella
+(15, 400.00), -- Payment for Mason
+(16, 300.00), -- Payment for Mia
+(17, 400.00), -- Payment for Ethan
+(18, 300.00), -- Payment for Charlotte
+(19, 400.00), -- Payment for Alexander
+(20, 300.00), -- Payment for Amelia
+(21, 400.00), -- Payment for Logan
+(22, 300.00), -- Payment for Harper
+(23, 400.00), -- Payment for Lucas
+(24, 300.00), -- Payment for Ella
+(25, 400.00), -- Payment for Jackson
+(26, 300.00), -- Payment for Avery
+(27, 400.00), -- Payment for Sebastian
+(28, 300.00), -- Payment for Sofia
+(29, 400.00), -- Payment for Gabriel
+(30, 300.00), -- Payment for Scarlett
+(31, 400.00), -- Payment for Carter
+(32, 300.00), -- Payment for Victoria
+(33, 400.00), -- Payment for Henry
+(34, 300.00), -- Payment for Grace
+(35, 400.00), -- Payment for Wyatt
+(36, 300.00), -- Payment for Chloe
+(37, 400.00), -- Payment for Owen
+(38, 300.00), -- Payment for Zoe
+(39, 400.00), -- Payment for Aiden
+(40, 300.00), -- Payment for Riley
+(41, 400.00), -- Payment for Daniel
+(42, 300.00), -- Payment for Nora
+(43, 400.00), -- Payment for Matthew
+(44, 300.00), -- Payment for Lily
+(45, 400.00), -- Payment for Samuel
+(46, 300.00), -- Payment for Ella
+(47, 400.00); -- Payment for Scarlett
+
+-- Insert data into additional_services table
+INSERT INTO additional_services (room_id, area, price) VALUES
+(1, 'bar', 20.00),         -- Services for Anna's double room
+(2, 'restaurant', 50.00),  -- Services for Anna's single room
+(3, 'taxi', 30.00),        -- Services for John's family room
+(4, 'bar', 20.00),         -- Services for Emily's double room
+(5, 'restaurant', 50.00),  -- Services for Michael's single room
+(6, 'taxi', 30.00),        -- Services for Jessica's family room
+(7, 'bar', 20.00),         -- Services for Chris's double room
+(8, 'restaurant', 50.00),  -- Services for Sophia's single room
+(9, 'taxi', 30.00),        -- Services for James's double room
+(10, 'bar', 20.00),         -- Services for David's family room
+(11, 'restaurant', 50.00),  -- Services for Olivia's single room
+(12, 'taxi', 30.00),        -- Services for Liam's double room
+(13, 'bar', 20.00),         -- Services for Ava's family room
+(14, 'restaurant', 50.00),  -- Services for Noah's single room
+(15, 'taxi', 30.00),        -- Services for Isabella's double room
+(16, 'bar', 20.00),         -- Services for Mason's family room
+(17, 'restaurant', 50.00),  -- Services for Mia's single room
+(18, 'taxi', 30.00),        -- Services for Ethan's double room
+(19, 'bar', 20.00),         -- Services for Charlotte's family room
+(20, 'restaurant', 50.00),  -- Services for Alexander's single room
+(21, 'taxi', 30.00),        -- Services for Amelia's double room
+(22, 'bar', 20.00),         -- Services for Logan's single room
+(23, 'restaurant', 50.00),  -- Services for Harper's family room
+(24, 'taxi', 30.00),        -- Services for Lucas's double room
+(25, 'bar', 20.00),         -- Services for Ella's single room
+(26, 'restaurant', 50.00),  -- Services for Jackson's family room
+(27, 'taxi', 30.00),        -- Services for Avery's double room
+(28, 'bar', 20.00),         -- Services for Sebastian's single room
+(29, 'restaurant', 50.00),  -- Services for Sofia's family room
+(30, 'taxi', 30.00),        -- Services for Gabriel's double room
+(31, 'bar', 20.00),         -- Services for Scarlett's single room
+(32, 'restaurant', 50.00),  -- Services for Carter's double room
+(33, 'taxi', 30.00),        -- Services for Victoria's family room
+(34, 'bar', 20.00),         -- Services for Henry's single room
+(35, 'restaurant', 50.00),  -- Services for Grace's double room
+(36, 'taxi', 30.00),        -- Services for Wyatt's family room
+(37, 'bar', 20.00),         -- Services for Chloe's single room
+(38, 'restaurant', 50.00),  -- Services for Owen's double room
+(39, 'taxi', 30.00),        -- Services for Zoe's family room
+(40, 'bar', 20.00),         -- Services for Aiden's single room
+(41, 'restaurant', 50.00),  -- Services for Riley's double room
+(42, 'taxi', 30.00),        -- Services for Daniel's family room
+(43, 'bar', 20.00),         -- Services for Nora's single room
+(44, 'restaurant', 50.00),  -- Services for Matthew's double room
+(45, 'taxi', 30.00);  -- Services for Benjamin's double room
+
+
+
+-- Shows guest who have not paid all cost of the apartment(s) yet. Data is shown ASC order in order to see the guest that should pay in near future
+
+With gen_info as(
+select CONCAT( g.FirstName,' ', g.LastName) AS Guest_name, GROUP_CONCAT( r.number_of_room) AS Number_of_room , SUM(p.payment/2) as Already_paid, SUM(TIMESTAMPDIFF(DAY, b.check_in, b.check_out) * r.price + a.price ) AS Total_cost, MAX(b.check_out) AS Date_of_check_out
+from guests g
+join payments p on g.ID = p.guest_id
+join booking b on g.ID = b.guest_id
+join rooms r on r.booking_id = b.ID
+join additional_services a on a.room_id = r.ID
+group by Guest_name)
+SELECT Guest_name, Number_of_room,Already_paid, Total_cost , (Total_cost - Already_paid) AS Remain_to_pay, Date_of_check_out
+FROM gen_info
+WHERE (Total_cost - Already_paid) > 0 
+ORDER BY  Date_of_check_out DESC;
+
+
+
+
+
