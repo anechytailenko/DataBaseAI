@@ -1,0 +1,114 @@
+-> Group aggregate: group_concat(g.Lecturer separator ',')  (cost=995563 rows=0) (actual time=1613..1615 rows=57 loops=1)
+    -> Nested loop inner join  (cost=995563 rows=0) (actual time=1613..1615 rows=65 loops=1)
+        -> Sort: g.Course_Name  (cost=2.85..2.85 rows=0) (actual time=1612..1612 rows=4539 loops=1)
+            -> Filter: ((g.Course_Name is not null) and (g.Average_grade is not null))  (cost=2.5..2.5 rows=0) (actual time=1608..1608 rows=4539 loops=1)
+                -> Table scan on g  (cost=2.5..2.5 rows=0) (actual time=1608..1608 rows=4539 loops=1)
+                    -> Materialize CTE grade_course_lecturer if needed  (cost=0..0 rows=0) (actual time=1608..1608 rows=4539 loops=1)
+                        -> Filter: (`count(s.id)` > 5)  (actual time=1590..1606 rows=4539 loops=1)
+                            -> Table scan on <temporary>  (actual time=1590..1604 rows=90601 loops=1)
+                                -> Aggregate using temporary table  (actual time=1590..1590 rows=90601 loops=1)
+                                    -> Nested loop inner join  (cost=646293 rows=398223) (actual time=0.392..784 rows=249713 loops=1)
+                                        -> Nested loop inner join  (cost=506915 rows=398223) (actual time=0.327..551 rows=249713 loops=1)
+                                            -> Filter: ((e.semester in ('Fall Semester 2024','Winter Semester 2024','Spring Semester 2025','Summer Semester 2025')) and (e.student_id is not null) and (e.course_id is not null))  (cost=100621 rows=398223) (actual time=0.243..349 rows=249713 loops=1)
+                                                -> Table scan on e  (cost=100621 rows=995557) (actual time=0.232..161 rows=1e+6 loops=1)
+                                            -> Single-row index lookup on s using PRIMARY (id=e.student_id)  (cost=0.92 rows=1) (actual time=708e-6..726e-6 rows=1 loops=249713)
+                                        -> Single-row index lookup on c using PRIMARY (id=e.course_id)  (cost=0.25 rows=1) (actual time=830e-6..848e-6 rows=1 loops=249713)
+        -> Covering index lookup on m using <auto_key0> (Course_Name=g.Course_Name, Max_Average_grade=g.Average_grade)  (cost=0.25..2.5 rows=10) (actual time=664e-6..666e-6 rows=0.0143 loops=4539)
+            -> Materialize CTE max_grade_per_course  (cost=0..0 rows=0) (actual time=1.43..1.43 rows=57 loops=1)
+                -> Table scan on <temporary>  (actual time=1.4..1.4 rows=57 loops=1)
+                    -> Aggregate using temporary table  (actual time=1.4..1.4 rows=57 loops=1)
+                        -> Table scan on Grade_course_Lecturer  (cost=2.5..2.5 rows=0) (actual time=708e-6..0.315 rows=4539 loops=1)
+                            -> Materialize CTE grade_course_lecturer if needed (query plan printed elsewhere)  (cost=0..0 rows=0) (never executed)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
